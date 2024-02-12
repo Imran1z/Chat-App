@@ -31,7 +31,7 @@ const Login = () => {
 
 
 
-                    <a href='#' className='text-sm  hover:underline hover:text-blue-600 mt-5 inline-block'>
+                    <a href='#' className='text-sm  hover:text-blue-600 mt-5 inline-block'>
  						{"Don't"} have an account?
  					</a>
                 </form>
