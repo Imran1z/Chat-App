@@ -1,5 +1,5 @@
 import React from 'react'
-import GenderCheckbox from '../components/GenderCheckbox'
+import GenderCheckbox from '../components/GenderCheckbox/GenderCheckbox'
 
 const Signup = () => {
   return (
