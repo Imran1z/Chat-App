@@ -53,10 +53,32 @@ export const signup=async (req, res)=>{
     }
 }
 
-export const signin=(req, res)=>{
+export const signin= async (req, res)=>{
     try {
+        const {username,password}=req.body;
+
+        const userdb=await User.findOne({username})
+
+        const validPassword = bcryptjs.compareSync(password,userdb.password);
+
+        if (!userdb || !validPassword) {
+			return res.status(400).json({ error: "Invalid username or password" });
+		}
+
+          const token =jwt.sign({id:userdb._id},process.env.JWT_SECRET,{expiresIn:'15d'});
+
+               const {password:hashedPassword,...user}=userdb._doc;
+
+               const expiryDate = new Date(Date.now()+(24 * 60 * 60 * 1000));
+
+
+               res.cookie('token',token ,{httpOnly:true,expires:expiryDate}).status(200).json({user});
+
+
+
     } catch (error) {
-        
+        console.log("Error in login controller", error.message);
+		res.status(500).json({ error: "Internal Server Error" });
     }
 }
 
