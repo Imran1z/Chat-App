@@ -56,14 +56,24 @@ export const signup=async (req, res)=>{
 export const signin= async (req, res)=>{
     try {
         const {username,password}=req.body;
+        //console.log("11111",req.body)
 
         const userdb=await User.findOne({username})
 
+        if (!userdb) {
+
+            return res.status(400).json({ error: "Invalid username or password" });
+
+        }
+
         const validPassword = bcryptjs.compareSync(password,userdb.password);
+        //console.log("22222",userdb)
 
         if (!userdb || !validPassword) {
 			return res.status(400).json({ error: "Invalid username or password" });
 		}
+
+          //console.log(userdb)
 
           const token =jwt.sign({id:userdb._id},process.env.JWT_SECRET,{expiresIn:'15d'});
 

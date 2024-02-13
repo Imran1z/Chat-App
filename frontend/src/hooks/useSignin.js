@@ -9,6 +9,7 @@ const useSignin = () => {
     const {setAuthUser}=useAuthContext()
 
     const signin =async ({username ,password })=>{
+      //  console.log("use signin hook",{username ,password })
         const success =handleInputErrors({username,password});
 
         if (!success) {
@@ -23,7 +24,7 @@ const useSignin = () => {
             });
 
             const data =await res.json();
-            console.log(data)
+           // console.log("data from the api",data)
             if (data.error) {
                 throw new Error(data.error)
             }

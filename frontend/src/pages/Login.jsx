@@ -9,6 +9,7 @@ const Login = () => {
 
 	const handleSubmit=async(e)=>{
 		e.preventDefault();
+		//console.log("login page",inputs)
 		await signin(inputs)
 	}
 
