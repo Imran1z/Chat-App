@@ -3,9 +3,12 @@ import Message from './Message'
 import useGetMessages from '../../hooks/useGetMessages'
 import MessageSkeletons from '../skeletons/MessageSkeletons';
 import { useAuthContext } from '../../context/AuthContext';
+import useListenMessages from '../../hooks/useListenMessages';
 
 const Messages = () => {
 	const{messages,loading} = useGetMessages();
+	useListenMessages()
+	console.log(messages)
 	const lastMessageRef =useRef();
 
 

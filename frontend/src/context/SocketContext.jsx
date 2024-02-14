@@ -9,6 +9,7 @@ export const SockectContextProvider =({children})=>{
     const [sockect, setSockect] = useState(null);
     const [onlineUsers, setOnlineUsers] = useState([]);
     const{authUser}=useAuthContext();
+   // console.log(authUser.user._id)
 
 
     useEffect(()=>{
