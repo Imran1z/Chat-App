@@ -17,7 +17,7 @@ const MessageContainer = () => {
 	
 	  return () => {
 		setSelectedConversation(null)
-		console.log('1111111111')
+		//console.log('1111111111')
 	  }
 	}, [setSelectedConversation])
 	
