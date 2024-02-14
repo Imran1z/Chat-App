@@ -1,26 +1,22 @@
 import { useEffect } from "react";
-
-import { useSocketContext } from "../context/SocketContext";
+import { useSocketContext } from "../context/SocketContext"
 import useConversation from "../zustand/useConversation";
 
-//import notificationSound from "../assets/sounds/notification.mp3";
-
 const useListenMessages = () => {
-	const { sockect } = useSocketContext();
-   // console.log(sockect)
-	const { messages, setMessages } = useConversation();
+    const {socket}=useSocketContext();
+    const {messages,setMessages}=useConversation();
 
-	useEffect(() => {
-        if(!sockect)return;
-		sockect?.on("newMessage", (newMessage) => {
-			// newMessage.shouldShake = true;
-			// const sound = new Audio(notificationSound);
-			// sound.play();
-			setMessages([...messages, newMessage]);
-           // console.log("messages from use listen",newMessage)
-		});
+    useEffect(() => {
+        if (!socket) return; // Guard against socket being undefined
 
-		return () => sockect?.off("newMessage");
-	}, [sockect, setMessages, messages]);
-};
-export default useListenMessages;
+        socket?.on("newMessage",(newMessage)=>{
+        setMessages([...messages,newMessage])
+      })
+
+      return ()=> socket?.off("newMessage")
+    }, [socket,setMessages])
+    
+  
+}
+
+export default useListenMessages

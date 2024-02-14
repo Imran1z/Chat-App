@@ -6,7 +6,7 @@ import io from 'socket.io-client'
 export const SockectContext =createContext();
 
 export const SockectContextProvider =({children})=>{
-    const [sockect, setSockect] = useState(null);
+    const [socket, setSockect] = useState(null);
     const [onlineUsers, setOnlineUsers] = useState([]);
     const{authUser}=useAuthContext();
    // console.log(authUser.user._id)
@@ -14,23 +14,23 @@ export const SockectContextProvider =({children})=>{
 
     useEffect(()=>{
         if (authUser) {
-            const sockect =io("http://localhost:5000",{
+            const socket =io("http://localhost:5000",{
                 query:{
                     userId:authUser.user._id,
                 }
             });
 
-            setSockect(sockect);
+            setSockect(socket);
 
-            sockect.on('getOnlineUsers',(users)=>{
+            socket.on('getOnlineUsers',(users)=>{
                 setOnlineUsers(users)
             })
 
-            return ()=> sockect.close()
+            return ()=> socket.close()
             
         }else{
-           if (sockect) {
-            sockect.close();
+           if (socket) {
+            socket.close();
             setSockect(null)
             
            } 
@@ -39,7 +39,7 @@ export const SockectContextProvider =({children})=>{
     },[authUser])
 
     return(
-        <SockectContext.Provider value={{sockect,onlineUsers}}>
+        <SockectContext.Provider value={{socket,onlineUsers}}>
             {children}
         </SockectContext.Provider>
     )
