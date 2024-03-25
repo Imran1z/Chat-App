@@ -15,7 +15,7 @@ const __dirname = path.resolve();
 
 // Middleware
 app.use(cors({
-    origin: "http://localhost:5173" // Update with your React client origin
+    origin: "http://localhost:5173" // Update with your Reacjjjt client origin
 }));
 app.use(express.json());
 app.use(cookieParser());
